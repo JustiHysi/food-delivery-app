@@ -1,0 +1,97 @@
+<div class="dashboard-container">
+  <h1>Restaurant Dashboard</h1>
+
+  <!-- Tabs for Orders and Menu Management -->
+  <div class="tabs">
+    <button
+      [class.active]="activeTab === 'orders'"
+      (click)="switchTab('orders')"
+    >
+      Orders
+    </button>
+    <button
+      [class.active]="activeTab === 'menu-management'"
+      (click)="switchTab('menu-management')"
+    >
+      Menu Management
+    </button>
+  </div>
+
+  <!-- Orders Management -->
+  <div *ngIf="activeTab === 'orders'">
+    
+    <div class="orders-container" *ngIf="orders.length > 0">
+      <div *ngFor="let order of orders; let i = index" class="order-card">
+        <h3>Order {{ i + 1 }}</h3>
+        <div class="order-info">
+          <p><strong>Order Date:</strong> {{ order.orderDate | date: 'medium' }}</p>
+          <p><strong>Address:</strong> {{ order.address }}</p>
+          <p><strong>Status:</strong> {{ order.status }}</p>
+          <p><strong>Total Amount:</strong> {{ order.totalAmount | currency }}</p>
+        </div>
+        <div class="products-section">
+          <h4>Products:</h4>
+          <ul>
+            <li *ngFor="let product of order.products">
+              <p><strong>Name:</strong> {{ product.name }}</p>
+              <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+              <p><strong>Price:</strong> {{ product.price | currency }}</p>
+            </li>
+          </ul>
+        </div>
+        <button
+          [ngClass]="{
+            'pending': order.status === 'Pending',
+            'completed': order.status === 'Completed'
+          }"
+          (click)="updateOrderStatus(order)"
+        >
+          {{ order.status === 'Completed' ? 'Order Confirmed' : 'Confirm Order' }}
+        </button>
+      </div>
+    </div>
+    
+    
+
+
+
+  </div>
+
+  <!-- Menu Management -->
+  <div *ngIf="activeTab === 'menu-management'" class="menu-management-section">
+    <h2>Manage Menu</h2>
+    <button class="add-product-btn" (click)="openAddProductModal()">Add Product</button>
+    <table class="menu-table" *ngIf="menuItems.length > 0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of menuItems">
+          <td>{{ item.name }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.price | currency }}</td>
+          <td>
+            <button (click)="editProduct(item)" class="edit-btn">Edit</button>
+            <button (click)="deleteProduct(item.id)" class="delete-btn">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="no-data" *ngIf="menuItems.length === 0">
+      <p>No menu items available.</p>
+    </div>
+  </div>
+
+  <!-- Add/Edit Product Modal -->
+  <app-add-product-modal
+    *ngIf="showAddProductModal"
+    [product]="selectedProduct"
+    (close)="closeAddProductModal()"
+    (saveProduct)="selectedProduct ? saveProduct($event) : addProduct($event)"
+  ></app-add-product-modal>
+</div>

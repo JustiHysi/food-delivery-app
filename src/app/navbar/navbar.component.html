@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <div class="navbar-content">
+      <div class="brand-logo">
+        <!-- Brand or Logo -->
+      </div>
+      <div class="auth-buttons">
+        <button class="btn login-btn" (click)="openLoginModal()">Login</button>
+        <button class="btn signup-btn" (click)="openSignupModal()">Signup</button>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Login Modal -->
+  <app-login-modal *ngIf="isLoginModalOpen" (close)="closeLoginModal()"></app-login-modal>
+  
+  <!-- Signup Modal -->
+<app-signup-modal *ngIf="isSignupModalOpen" (close)="closeSignupModal()"></app-signup-modal>

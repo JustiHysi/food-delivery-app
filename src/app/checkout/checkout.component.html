@@ -1,0 +1,49 @@
+<div class="modal-content">
+  <div class="first-row">
+    <h1>Checkout</h1>
+    <div class="order-element">
+      <p class="static-text">Delivery Address</p>
+      <p class="d-text">{{ orderData.address }}</p>
+    </div>
+
+    <div class="order-element">
+      <p class="static-text">Payment Method</p>
+      <p class="d-text">{{ orderData.paymentMethod }}</p>
+    </div>
+  </div>
+
+  <h2>Order</h2>
+
+  <div class="second-row">
+    <div *ngFor="let item of orderData.products">
+      <div class="item">
+        <p class="item-name">{{ item.name }}</p>
+        <p class="item-qty">{{ item.quantity }} x {{ item.price }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-summary">
+    <div class="summary-item">
+      <span>Order Subtotal</span>
+      <span>{{ orderData.orderSubtotal }} ALL</span>
+    </div>
+    <div class="summary-item">
+      <span>Delivery Fee</span>
+      <span>{{ orderData.deliveryFee }} ALL</span>
+    </div>
+    <div class="summary-item promotion">
+      <span>Promotion</span>
+      <span>-{{ orderData.promotionDiscount}} ALL</span>
+    </div>
+    <div class="summary-total">
+      <span>Total</span>
+      <span>{{ orderData.totalAmount }} ALL</span>
+    </div>
+  </div>
+
+  <div class="checkout-buttons">
+    <button class="button2" (click)="goBack()">&les;</button>
+    <button class="button1" (click)="checkoutConfirm()">Confirm Order {{ orderData.totalAmount }} ALL</button>
+  </div>
+</div>

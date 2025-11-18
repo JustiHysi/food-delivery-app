@@ -1,0 +1,106 @@
+<div class="modal-header" (click)="closeModal()">
+  <div
+    class="modal-image"
+    [style.backgroundImage]="'url(' + restaurantData.image + ')'"
+  >
+    <img src="assets/tani.png" alt="Restaurant Logo" class="restaurant-logo" />
+  </div>
+</div>
+
+<div class="modal-content">
+  <div class="first-row">
+    <h2 class="title">{{ restaurantData?.name }}</h2>
+    <p class="delivery-status">Delivery</p>
+  </div>
+
+  <div class="second-row">
+    <p class="location">{{ restaurantData?.address }}</p>
+    <div class="status">
+      <span class="avg-price">500 ALL</span>
+      <span class="time">⏱ {{ restaurantData?.time }} Min </span>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <input type="text" placeholder="Search Dish" class="search-bar" />
+  </div>
+
+  <div class="category-filters">
+    <span
+      *ngFor="let category of restaurantData?.categories"
+      class="filter"
+      [class.active]="selectedCategory === category"
+      (click)="selectCategory(category)"
+    >
+      {{ category }}
+    </span>
+  </div>
+
+  <p class="category-name">{{ selectedCategory }}</p>
+  <div class="dishes">
+    <div class="dishv2" *ngFor="let dish of filteredDishes">
+      <div style="width: 160px" *ngIf="dish?.imageUrl">
+        <img
+          height="100px"
+          width="160px"
+          [src]="dish?.imageUrl"
+          [alt]="dish?.name || 'Dish Image'"
+        />
+      </div>
+
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: start;
+          gap: 10px;
+        "
+      >
+        <div style="font-weight: bold; font-size: large; color: #000000">
+          {{ dish?.name || 'Unnamed Dish' }}
+        </div>
+        <div style="font-weight: normal; font-size: medium; color: #a5b4cc">
+          {{ dish?.description || 'No description available' }}
+        </div>
+        <div style="font-weight: lighter; font-size: small; color: #2ecc71">
+          {{ dish?.price || 0 }} ALL
+        </div>
+      </div>
+
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 10px;
+        "
+      >
+        <button
+          class="quantity-btn"
+          [ngStyle]="{
+            'background-color': (dish?.quantity || 0) > 0 ? '#FF3A44' : '#F9FAFC'
+          }"
+          (click)="decrementQuantity(dish)"
+        >
+          -
+        </button>
+        <span class="quantity">{{ dish?.quantity || 0 }}</span>
+        <button
+          class="quantity-btn increment-btn"
+          style="background-color: #ffd037"
+          (click)="incrementQuantity(dish)"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="checkout-button" *ngIf="totalPrice > 500">
+    <button (click)="saveProducts()">
+      Continue to Checkout {{ totalPrice }} ALL
+    </button>
+  </div>
+</div>

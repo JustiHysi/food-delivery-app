@@ -1,0 +1,176 @@
+.modal-header {
+  padding: 0 15px;
+ 
+  margin-top: 20px;
+
+  h1 {
+    font-size: 1.5rem;
+    color: #000;
+    margin-bottom: 15px;
+  }
+}
+
+/* Modal Content */
+.modal-content {
+  
+  padding: 0.75rem 1.5rem;
+  max-height: 65vh;
+  min-height: 95vh;
+
+  display: flex;
+  flex-direction: column;
+
+  .first-row {
+    display: flex;
+    flex-direction: column;
+    column-gap: 25px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    .order-element {
+      .static-text {
+        margin-bottom: 3px;
+        color: #a5b4cc;
+      }
+
+      .d-text {
+        color: #000;
+      }
+    }
+  }
+
+  .second-row {
+    margin-top: 20px;
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+
+      .item-price {
+        color: #a5b4cc;
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .order-summary {
+    border-top: 1px solid #eaeaea;
+    padding-top: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: #a5b4cc;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.promotion {
+        color: #32cd32; /* Green color for promotion */
+      }
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #000;
+      margin-top: 15px;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  /* Position the checkout button at the bottom of the modal */
+  .checkout-buttons {
+    align-self: flex-end;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    gap: 10px;
+    margin-top: auto;
+
+    .button1 {
+      width: 95%;
+      border-radius: 40px;
+      background-color: #000000;
+      color: #ffffff;
+      font-size: 18px;
+      padding: 10px 0;
+      font-weight: 600;
+      text-align: center;
+
+      transition: background-color 0.3s;
+      text-align: center;
+
+      &:hover {
+        background-color: #333333; /* Darker shade on hover */
+      }
+    }
+
+    .button2 {
+      width: 5%;
+      border-radius: 50%;
+      background-color: #000000;
+      color: #ffffff;
+      font-size: 18px;
+      padding: 5px 0;
+      font-weight: 600;
+      text-align: center;
+
+      transition: background-color 0.3s;
+      text-align: center;
+
+      &:hover {
+        background-color: #333333; /* Darker shade on hover */
+      }
+    }
+  }
+}

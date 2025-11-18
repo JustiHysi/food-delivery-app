@@ -1,0 +1,25 @@
+<!-- src/app/login-modal/login-modal.component.html -->
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>{{ isAdminLogin ? 'Restaurant Owner Login' : 'Customer Login' }}</h2>
+    <form (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required />
+      </div>
+
+      
+
+      <button type="submit" class="btn submit-btn">Login</button>
+    </form>
+    <p class="role-toggle">
+      {{ isAdminLogin ? "Want to login as a customer?" : "Want to login as a restaurant owner?" }}
+      <a (click)="toggleAdminLogin()">{{ isAdminLogin ? "Click here" : "Click here" }}</a>
+    </p>
+    <button class="btn close-btn" (click)="closeModal()">×</button>
+  </div>
+</div>

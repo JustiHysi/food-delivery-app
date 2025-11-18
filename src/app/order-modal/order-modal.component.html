@@ -1,0 +1,35 @@
+<div class="modal-overlay" (click)="onClose()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="x-btn" (click)="onClose()">x</div>
+
+    <!-- Step 1: Restaurant Modal -->
+    <ng-container *ngIf="currentStep === 1">
+      <app-restaurant-modal
+        [restaurantData]="restaurantData"
+        (dataSaved)="saveData('products', $event)"
+        (totalPriceEvent)="onTotalPriceReceived($event)"
+        (next)="nextStep()"
+      ></app-restaurant-modal>
+    </ng-container>
+
+    <!-- Step 2: Map Component with totalPrice passed as input -->
+    <ng-container *ngIf="currentStep === 2">
+      <app-map
+        [totalPrice]="totalPrice"
+        (dataSaved)="saveData('address', $event)"
+        (passTotalPrice)="onTotalPriceFromMap($event)"
+        (next)="nextStep()"
+        (back)="previousStep()"
+      ></app-map>
+    </ng-container>
+
+    <!-- Step 3: Checkout Component -->
+    <ng-container *ngIf="currentStep === 3">
+      <app-checkout
+        [orderData]="orderData"
+        (dataSaved)="saveData('confirmation', $event)"
+        (back)="previousStep()"
+      ></app-checkout>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,103 @@
+<div class="home-page">
+  <div class="content-container">
+    <!-- Left Text Section -->
+    <div class="text-section">
+      <h2 class="location" >Tirana, Albania</h2>
+      <h1 class="main-heading">Good Food is Never Too Far</h1>
+      <p class="description">
+        Ushqimet më të mira, tashmë vijnë më shpejt sesa mendon. Qoftë mëngjes,
+        drekë apo darkë, "Just Order" jua lehtëson eksplorimin e ushqimeve të
+        shumëllojshme.
+      </p>
+
+      <!-- Categories Section -->
+      <div class="categories">
+        <span
+          class="category"
+          *ngFor="
+            let category of [
+              'Burger',
+              'Pasta',
+              'Souvlaki',
+              'Pizza',
+              'Healthy',
+              'Grill',
+              'Mexican',
+              'Sushi'
+            ]
+          "
+          (click)="filterByCategory(category)"
+          [class.active]="selectedCategory === category"
+        >
+          {{ category }}
+        </span>
+      </div>
+
+      <div class="download-section">
+        <p>Shkarko në</p>
+        <div class="download-container">
+          <img src="assets/appstore.png" alt="" />
+          <img src="assets/android.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Image Section with Background Ellipses -->
+    <div class="image-section">
+      <img
+        src="assets/mockup.png"
+        alt="Mobile App Mockup"
+        class="mockup-image"
+      />
+      <img
+        src="assets/ecllipse-small.png"
+        alt="ellipse-background"
+        class="ellipse-background-small"
+      />
+      <img
+        src="assets/ecllipse.png"
+        alt="ellipse-background"
+        class="ellipse-background"
+      />
+    </div>
+  </div>
+
+  <!-- Explore Section for Restaurants -->
+  <div class="explore-section">
+    <h2 class="section-title">Eksploro shijet në "Just Order"</h2>
+
+    <!-- Check if filteredRestaurants is empty -->
+    <div *ngIf="filteredRestaurants.length === 0" class="empty-state">
+      <p>No restaurants available for the selected category.</p>
+    </div>
+
+    <!-- Restaurants Grid -->
+    <div class="food-items-grid" *ngIf="filteredRestaurants.length > 0">
+      <div
+        *ngFor="let restaurant of filteredRestaurants"
+        class="food-item-card"
+        (click)="openRestaurantModal(restaurant)"
+      >
+        <div class="image-container">
+          <img [src]="restaurant.image" [alt]="restaurant.name" />
+        </div>
+        <div class="details">
+          <h3 class="name">{{ restaurant.name }}</h3>
+          <div class="other-details">
+            <p class="cuisine">{{ restaurant.cuisine }}</p>
+            <p class="time">
+              <span class="icon">⏱️</span>
+              <span>{{ restaurant.time }} Min</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-order-modal
+  *ngIf="isModalOpen"
+  [restaurantData]="selectedRestaurant"
+  (closeModal)="closeModal()"
+></app-order-modal>

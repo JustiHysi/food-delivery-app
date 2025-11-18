@@ -1,0 +1,64 @@
+<div class="modal-overlay">
+  <div class="modal-container">
+    <h2>{{ product ? "Edit Product" : "Add Product" }}</h2>
+    <form (ngSubmit)="save()">
+      <div class="form-group">
+        <label for="name">Product Name:</label>
+        <input
+          id="name"
+          type="text"
+          [(ngModel)]="productForm.name"
+          name="name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea
+          id="description"
+          [(ngModel)]="productForm.description"
+          name="description"
+          required
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input
+          id="price"
+          type="number"
+          [(ngModel)]="productForm.price"
+          name="price"
+          min="0"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="imageUrl">Image URL:</label>
+        <input
+          id="imageUrl"
+          type="text"
+          [(ngModel)]="productForm.imageUrl"
+          name="imageUrl"
+          placeholder="Enter URL or upload below"
+        />
+      </div>
+      <div class="form-group">
+        <label for="image">Upload Image:</label>
+        <input
+          id="image"
+          type="file"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+        />
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="save-btn">
+          {{ product ? "Update" : "Add" }}
+        </button>
+        <button type="button" class="cancel-btn" (click)="closeModal()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
